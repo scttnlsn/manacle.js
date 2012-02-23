@@ -10,7 +10,7 @@
         root.manacle = manacle;
     }
 
-    manacle.VERSION = '0.0.1';
+    manacle.VERSION = '0.1.0';
 
     manacle.noConflict = function() {
         root.manacle = orig;

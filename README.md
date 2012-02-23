@@ -8,47 +8,53 @@ Example
 
 Create a new ACL:
 
-    var acl = manacle.create();
+```javascript
+var acl = manacle.create();
+```
 
 Define some rules:
 
-    var user = { ... };
+```javascript
+var user = { ... };
 
-    acl.allow('read', 'post');
+acl.allow('read', 'post');
 
-    if (user) {
-        acl.allow('create', 'post');
-        acl.allow(['update', 'delete'], 'post', function(post) {
-            return post.user === user;
-        });
-        
-        if (user.admin) {
-            acl.allow('*', 'post');
-        }
-        
-        if (user.blocked) {
-            acl.deny(['create', 'update', 'delete'], 'post');
-        }
+if (user) {
+    acl.allow('create', 'post');
+    acl.allow(['update', 'delete'], 'post', function(post) {
+        return post.user === user;
+    });
+    
+    if (user.admin) {
+        acl.allow('*', 'post');
     }
+    
+    if (user.blocked) {
+        acl.deny(['create', 'update', 'delete'], 'post');
+    }
+}
+```
 
 Check various rules:
 
-    var post = { ... };
-    
-    // `true` for users who are not blocked
-    acl.allowed('create', 'post');
-    
-    // `true` for all users (the given post object is ignored
-    // and unnecessary since there is no condition defined)
-    acl.allowed('read', 'post', post);
-    
-    // `true` for users who are not blocked and either own
-    // the post or are an admin
-    acl.allowed('update', 'post', post);
-    acl.allowed('delete', 'post', post);
-    
-    // `true` (undefined rules are denied by default)
-    acl.denied('foo', 'bar');
+```javascript
+var post = { ... };
+
+// `true` for users who are not blocked
+acl.allowed('create', 'post');
+
+// `true` for all users (the given post object is ignored
+// and unnecessary since there is no condition defined)
+acl.allowed('read', 'post', post);
+
+// `true` for users who are not blocked and either own
+// the post or are an admin
+acl.allowed('update', 'post', post);
+acl.allowed('delete', 'post', post);
+
+// `true` (undefined rules are denied by default)
+acl.denied('foo', 'bar');
+```
     
 Note that the order in which the rules are defined matters as each newly
 defined rule takes precedence over past rules.

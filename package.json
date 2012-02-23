@@ -1,6 +1,6 @@
 {
     "name":         "manacle",
-    "version":      "0.0.0",
+    "version":      "0.1.0",
     "description":  "Lightweight ACL for Node.js and the browser",
     "homepage":     "http://github.com/scttnlsn/manacle.js",
     "author":       "Scott Nelson <scottbnel@gmail.com>",
